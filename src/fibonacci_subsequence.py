@@ -30,7 +30,7 @@ def generate_fibonacci_subsequence(n):
     
     # Generate Fibonacci numbers
     sequence = [0, 1]
-    max_limit = n * 10
+    max_limit = n * 20  # Increased upper limit to find more complex solutions
     while sequence[-1] <= max_limit:
         sequence.append(sequence[-1] + sequence[-2])
     
@@ -38,10 +38,15 @@ def generate_fibonacci_subsequence(n):
     for length in range(2, len(sequence)):
         for start in range(len(sequence) - length + 1):
             subsequence = sequence[start:start+length]
-            even_sum = sum(subsequence[i] for i in range(0, len(subsequence), 2))
+            
+            # Check if the sum of even-indexed numbers equals the target
+            subsequence_even_indices = [subsequence[i] for i in range(0, len(subsequence), 2)]
+            even_sum = sum(subsequence_even_indices)
             
             if even_sum == n:
-                return subsequence
+                # Verify the subsequence is meaningful (more than just even numbers)
+                if len(subsequence) > 1:
+                    return subsequence
     
     # No valid subsequence found
     raise ValueError(f"No Fibonacci subsequence found with even-indexed sum of {n}")
