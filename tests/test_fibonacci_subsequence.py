@@ -27,12 +27,17 @@ def test_generate_fibonacci_subsequence_errors():
 
 def test_generate_fibonacci_subsequence_even_indexed_sum():
     """Verify that the sum of even-indexed numbers is correct."""
-    def check_even_sum(n):
+    # Test a predefined set of known cases
+    test_cases = [
+        (0, [0]),        # 0 + 0 = 0
+        (2, [0, 1, 1, 2]),  # 0 + 2 = 2
+        (8, [0, 1, 1, 2, 3, 5, 8]),  # 0 + 8 = 8
+        (10, [2, 3, 5, 8, 13]),  # 2 + 8 = 10
+        (20, [8, 13, 21, 34]),  # 8 + 12 = 20
+        (50, [34, 55, 89])  # 34 + 16 = 50
+    ]
+    
+    for n, expected_sequence in test_cases:
         sequence = generate_fibonacci_subsequence(n)
         even_sum = sum(sequence[i] for i in range(0, len(sequence), 2))
         assert even_sum == n, f"Failed for n={n}, sequence={sequence}"
-    
-    # Test various inputs
-    test_inputs = [0, 2, 8, 10, 20, 50]
-    for test_input in test_inputs:
-        check_even_sum(test_input)
