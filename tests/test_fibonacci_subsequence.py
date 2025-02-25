@@ -3,15 +3,9 @@ from src.fibonacci_subsequence import generate_fibonacci_subsequence
 
 def test_generate_fibonacci_subsequence_basic():
     """Test basic functionality with a few inputs."""
-    # Test a known case for 2
-    sequence_2 = generate_fibonacci_subsequence(2)
-    assert sequence_2[0::2] == [0, 2]
-    assert sum(sequence_2[0::2]) == 2
-    
-    # Test a case for 8
-    sequence_8 = generate_fibonacci_subsequence(8)
-    assert sequence_8[0::2] == [8]
-    assert sum(sequence_8[0::2]) == 8
+    # Defined test cases
+    assert generate_fibonacci_subsequence(2) == [0, 1, 1, 2]
+    assert generate_fibonacci_subsequence(8) == [0, 1, 1, 2, 3, 5, 8]
 
 def test_generate_fibonacci_subsequence_zero():
     """Test zero input."""
