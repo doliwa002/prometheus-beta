@@ -19,19 +19,19 @@ def generate_fibonacci_subsequence(n):
     if n == 0:
         return [0]
     
-    # Maximum search depth to prevent infinite loop
-    MAX_DEPTH = 30
+    # Generate full Fibonacci sequence first
+    sequence = [0, 1]
+    while sequence[-1] < 10000:  # Large enough to find most reasonable subsequences
+        sequence.append(sequence[-1] + sequence[-2])
     
-    # Try different starting points and subsequence lengths
-    for start_index in range(MAX_DEPTH):
-        for length in range(2, MAX_DEPTH):
-            # Generate sequence
-            sequence = [0, 1]
-            while len(sequence) < length + start_index:
-                sequence.append(sequence[-1] + sequence[-2])
-            
+    # Maximum search depth to prevent infinite loop
+    MAX_DEPTH = len(sequence)
+    
+    # Try different subsequence lengths and start points
+    for length in range(2, MAX_DEPTH):
+        for start in range(MAX_DEPTH - length + 1):
             # Extract subsequence
-            subsequence = sequence[start_index:start_index+length]
+            subsequence = sequence[start:start+length]
             
             # Check if sum of even-indexed numbers matches target
             even_sum = sum(subsequence[i] for i in range(0, len(subsequence), 2))
